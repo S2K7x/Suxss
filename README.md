@@ -26,7 +26,7 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/suxss.git
+   git clone https://github.com/S2K7x/suxss.git
    cd suxss
    ```
 
