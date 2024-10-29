@@ -1,0 +1,5 @@
+requests
+urllib3
+base64
+argparse
+termcolor
